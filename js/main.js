@@ -2,8 +2,7 @@ import * as THREE from '../src/three.module.js';
 import { PointerLockControls } from '../src/PointerLockControls.js'
 
 let camera, scene, renderer, pControl
-let xdir = 0, zdir = 0
-let tiempoI, tiempoF, vel, delta
+
 
 scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffffff)
@@ -32,63 +31,13 @@ pControl = new PointerLockControls(camera, renderer.domElement)
 document.getElementById('btnPlay').onclick = () => {
     pControl.lock()
 }
-//Mover con el teclado
-document.addEventListener('keydown', (e) => {
-    switch (e.keyCode) {
-        case 37:
-            xdir = -1
-            break;
-        case 38:
-            zdir = 1
-            break;
-        case 39:
-            xdir = 1
-            break;
-        case 40:
-            zdir = -1
-            break;
-    }
-})
 
-document.addEventListener('keyup', (e) => {
-    switch (e.keyCode) {
-        case 37:
-            xdir = 0
-            break;
-        case 38:
-            zdir = 0
-            break;
-        case 39:
-            xdir = 0
-            break;
-        case 40:
-            zdir = 0
-            break;
-    }
-})
-
-tiempoI = Date.now()
-vel = 50
 
 animate()
 
 function animate() {
 
     requestAnimationFrame(animate);
-
-    if (pControl.isLocked === true) {
-        tiempoF = Date.now()
-
-        delta = (tiempoF - tiempoI) / 1000
-
-        let xDis = xdir * vel * delta
-        let zDis = zdir * vel * delta
-
-        pControl.moveRight(xDis)
-        pControl.moveForward(zDis)
-
-        tiempoI = tiempoF
-    }
 
     renderer.render(scene, camera);
 }
