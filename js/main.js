@@ -32,7 +32,7 @@ pControl = new PointerLockControls(camera, renderer.domElement)
 document.getElementById('btnPlay').onclick = () => {
     pControl.lock()
 }
-
+//Mover con el teclado
 document.addEventListener('keydown', (e) => {
     switch (e.keyCode) {
         case 37:
